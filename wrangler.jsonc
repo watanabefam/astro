@@ -1,0 +1,24 @@
+{
+  "name": "astro-tina-cloudflare-template",
+  "main": ".output/server/index.mjs",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true,
+  },
+  "kv_namespaces": [
+    // @astrojs/cloudflare creates a SESSION KV binding automatically on first
+    // deploy, but Cloudflare does NOT write the ID back to this file. Pin it
+    // after the first deploy (Workers & Pages -> KV) or the second editor save
+    // will fail trying to recreate the namespace.
+    // { "binding": "SESSION", "id": "<your-namespace-id>" }
+  ],
+  "vars": {
+    // Used by astro.config `site` for canonical/sitemap/OG.
+    "SITE_URL": "https://example.com"
+  }
+  // Build-time Tina credentials are set in the Cloudflare dashboard
+  // (Workers -> Settings -> Variables & Secrets), not here:
+  //   PUBLIC_TINA_CLIENT_ID  (from tina.io project)
+  //   TINA_TOKEN             (content token from tina.io project)
+}

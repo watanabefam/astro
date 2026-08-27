@@ -1,0 +1,29 @@
+---
+import { tinaField } from "@tinacms/astro/tina-field";
+interface Props {
+  block: Record<string, any>;
+}
+const { block } = Astro.props;
+---
+
+<aside class="callout" data-tina-field={tinaField(block)}>
+  {
+    block.label && (
+      <strong data-tina-field={tinaField(block, "label")}>{block.label}: </strong>
+    )
+  }
+  <span data-tina-field={tinaField(block, "text")}>{block.text}</span>
+</aside>
+
+<style>
+  .callout {
+    margin: 1.5rem 0;
+    padding: 1rem 1.25rem;
+    border-left: 4px solid rgb(var(--accent));
+    background: linear-gradient(
+      rgba(var(--accent-dark), 40%),
+      rgba(var(--accent-dark), 20%)
+    );
+    border-radius: 0 8px 8px 0;
+  }
+</style>

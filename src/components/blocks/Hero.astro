@@ -1,0 +1,61 @@
+---
+import { tinaField } from "@tinacms/astro/tina-field";
+interface Props {
+  block: Record<string, any>;
+}
+const { block } = Astro.props;
+---
+
+<section class="hero" data-tina-field={tinaField(block)}>
+  {block.eyebrow && (
+    <p class="eyebrow" data-tina-field={tinaField(block, "eyebrow")}>
+      {block.eyebrow}
+    </p>
+  )}
+  <h1 data-tina-field={tinaField(block, "heading")}>{block.heading}</h1>
+  {
+    block.lead && (
+      <p class="body" data-tina-field={tinaField(block, "lead")}>
+        {block.lead}
+      </p>
+    )
+  }
+  {
+    block.ctaLabel && block.ctaHref && (
+      <a
+        class="cta"
+        href={block.ctaHref}
+        data-tina-field={tinaField(block, "ctaLabel")}
+      >
+        {block.ctaLabel}
+      </a>
+    )
+  }
+</section>
+
+<style>
+  .hero {
+    padding: 4rem 1rem;
+    text-align: center;
+  }
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgb(var(--accent-light));
+    font-size: 0.9rem;
+  }
+  h1 {
+    font-size: 3rem;
+    margin: 0.5rem 0;
+  }
+  .cta {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    background: var(--accent-gradient);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+  }
+</style>

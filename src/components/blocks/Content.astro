@@ -1,0 +1,20 @@
+---
+import TinaMarkdown from "@tinacms/astro/TinaMarkdown.astro";
+import { tinaField } from "@tinacms/astro/tina-field";
+interface Props {
+  block: Record<string, any>;
+}
+const { block } = Astro.props;
+---
+
+<article class="prose" data-tina-field={tinaField(block, "body")}>
+  <TinaMarkdown content={block.body} />
+</article>
+
+<style>
+  .prose {
+    max-width: 720px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+</style>
