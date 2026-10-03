@@ -6,9 +6,7 @@ import { defineConfig } from "tinacms";
 // Branch resolution: Workers Builds sets WORKERS_CI_BRANCH; Pages sets
 // CF_PAGES_BRANCH. Reading both lets preview deploys edit the right branch.
 const branch =
-  process.env.WORKERS_CI_BRANCH ||
-  process.env.CF_PAGES_BRANCH ||
-  "main";
+  process.env.WORKERS_CI_BRANCH || process.env.CF_PAGES_BRANCH || "main";
 
 export default defineConfig({
   branch,
@@ -98,7 +96,11 @@ export default defineConfig({
                 fields: [
                   { type: "string", name: "eyebrow" },
                   { type: "string", name: "heading", required: true },
-                  { type: "string", name: "lead", ui: { component: "textarea" } },
+                  {
+                    type: "string",
+                    name: "lead",
+                    ui: { component: "textarea" },
+                  },
                   { type: "string", name: "ctaLabel" },
                   { type: "string", name: "ctaHref" },
                 ],
@@ -125,6 +127,38 @@ export default defineConfig({
                     name: "body",
                     label: "Body",
                     required: true,
+                  },
+                ],
+              },
+              {
+                name: "faq",
+                label: "FAQ",
+                fields: [
+                  {
+                    type: "string",
+                    name: "sectionHeading",
+                    label: "Section Heading",
+                  },
+                  {
+                    type: "object",
+                    name: "items",
+                    label: "Questions & Answers",
+                    list: true,
+                    fields: [
+                      {
+                        type: "string",
+                        name: "question",
+                        label: "Question",
+                        required: true,
+                      },
+                      {
+                        type: "string",
+                        name: "answer",
+                        label: "Answer",
+                        required: true,
+                        ui: { component: "textarea" },
+                      },
+                    ],
                   },
                 ],
               },

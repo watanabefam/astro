@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Hero from "../components/blocks/Hero.astro";
 import Callout from "../components/blocks/Callout.astro";
 import Content from "../components/blocks/Content.astro";
+import Faq from "../components/blocks/Faq.astro";
 import { getPage, getSiteConfig } from "../lib/tina";
 
 const page = await getPage("home.md");
@@ -21,6 +22,7 @@ const config = await getSiteConfig();
         if (block.__typename === "PagesBlocksHero") return <Hero block={block} />;
         if (block.__typename === "PagesBlocksCallout") return <Callout block={block} />;
         if (block.__typename === "PagesBlocksContent") return <Content block={block} />;
+        if (block.__typename === "PagesBlocksFaq") return <Faq block={block} />;
         return null;
       })
     }

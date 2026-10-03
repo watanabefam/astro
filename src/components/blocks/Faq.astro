@@ -1,0 +1,59 @@
+---
+import { tinaField } from "@tinacms/astro/tina-field";
+interface Props {
+  block: Record<string, any>;
+}
+const { block } = Astro.props;
+// Empty-safe: a block with no items renders nothing (FR-008).
+const items = Array.isArray(block.items) ? block.items : [];
+---
+
+{
+  items.length > 0 && (
+    <section class="faq" data-tina-field={tinaField(block)}>
+      {block.sectionHeading && (
+        <h2 data-tina-field={tinaField(block, "sectionHeading")}>
+          {block.sectionHeading}
+        </h2>
+      )}
+      {items.map((item) => (
+        <details class="faq-item" data-tina-field={tinaField(block, "items")}>
+          <summary>{item.question}</summary>
+          <div class="faq-answer">{item.answer}</div>
+        </details>
+      ))}
+    </section>
+  )
+}
+
+<style>
+  .faq {
+    margin: 2rem 0;
+  }
+  .faq h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+  }
+  .faq-item {
+    border: 1px solid rgba(var(--accent-dark), 35%);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.75rem;
+    background: rgba(var(--accent-dark), 8%);
+  }
+  .faq-item summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.05rem;
+    overflow-wrap: break-word;
+  }
+  .faq-item summary::marker {
+    color: rgb(var(--accent));
+  }
+  .faq-answer {
+    margin-top: 0.5rem;
+    line-height: 1.6;
+    overflow-wrap: break-word;
+    white-space: pre-line;
+  }
+</style>

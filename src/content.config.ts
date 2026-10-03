@@ -11,8 +11,8 @@ const pages = defineCollection({
     blocks: z
       .array(
         z.object({
-          _template: z.enum(["hero", "callout", "content"]),
-        })
+          _template: z.enum(["hero", "callout", "content", "faq"]),
+        }),
       )
       .optional(),
   }),
